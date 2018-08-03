@@ -34,6 +34,7 @@ const {
   resetModules,
   itRenders,
   itThrowsWhenRendering,
+  expectMarkupMatch,
   serverRender,
   streamRender,
   clientRenderOnServerString,
@@ -493,6 +494,22 @@ describe('ReactDOMServerIntegration', () => {
       expect(e.firstChild.tagName).toBe('SPAN');
       expect(e.firstChild.getAttribute('id')).toBe('child');
       expect(e.firstChild.childNodes.length).toBe(0);
+    });
+
+    itRenders('a div with dangerouslySetInnerHTML that is malformed', async render => {
+      const weirdSplitStringArray = [
+        <div
+          key="markup-1"
+          dangerouslySetInnerHTML={{ __html: '<div><h1>InnerHtml Test</h1>' }}
+        />,
+        <div
+          key="markup-2"
+          dangerouslySetInnerHTML={{ __html: '</div>' }}
+        />,
+      ];
+
+      const e = await render(weirdSplitStringArray);
+      expect(e).toBe('brokenHTML?');
     });
 
     describe('newline-eating elements', function() {
