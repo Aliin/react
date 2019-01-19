@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import ReactVersion from 'shared/ReactVersion';
+import * as config from 'react/package.json';
 import {
   REACT_CONCURRENT_MODE_TYPE,
   REACT_FRAGMENT_TYPE,
@@ -47,6 +47,8 @@ import {
 } from './ReactElementValidator';
 import ReactSharedInternals from './ReactSharedInternals';
 import {enableStableConcurrentModeAPIs} from 'shared/ReactFeatureFlags';
+
+const ReactVersion = config.version;
 
 const React = {
   Children: {

@@ -29,6 +29,10 @@ describe('create-react-class-integration', () => {
     );
   });
 
+  it('should display react version', () => {
+    expect(React.version).toBe('16.7.0');
+  });
+
   it('should throw when `render` is not specified', () => {
     expect(function() {
       createReactClass({});
